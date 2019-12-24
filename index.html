@@ -43,7 +43,7 @@
             const timer = document.getElementById("timer");
             const starter = document.getElementById("start");
             const context = canvas.getContext("2d");
-            const totalCircles = 300;
+            const totalCircles = 250;
             const player = {x:window.innerWidth / 2, y:window.innerHeight / 2, r:5};
             const playerSpeed = 5;
 
@@ -121,6 +121,10 @@
                     temp.push(circle);
                     }
                 }
+                if(temp == 0 && pause == false){
+                    pause = true;
+                    alert("GAME CLEAR!!");
+                }
                 circles = temp;
                 return false;
             }
@@ -147,7 +151,7 @@
                 player.r = 5;
                 //add circles
                 for(let i = 0; i< totalCircles; i++){
-                    circles.push({x:Math.random() * context.canvas.width * 2/3 - context.canvas.width / 3, y:Math.random() * context.canvas.height, r:2+Math.random() * 35, c:generateRandomColor(),vx:(Math.random() - 0.5)*5, vy:(Math.random() - 0.5)*5});
+                    circles.push({x:Math.random() * context.canvas.width * 2/3 - context.canvas.width / 3, y:Math.random() * context.canvas.height, r:2+Math.random() * 35, c:generateRandomColor(),vx:(Math.random() - 0.5)*4.6, vy:(Math.random() - 0.5)*4.6}); //4.6이 최고 스피드
                 }
                 
             }
