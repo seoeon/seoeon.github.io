@@ -103,14 +103,23 @@
             }
 
             function checkCollision(){
+                const temp = [];
                 for(const index in circles){
                     const circle = circles[index];
 
                     const d = Math.sqrt((circle.x - player.x)*(circle.x - player.x  ) + (circle.y - player.y) * (circle.y - player.y));
                     if (d <= player.r + circle.r){
-                        return true;
+                        if(player.r < circle.r){
+                            return true;
+                        } else {
+                            player.r = Math.sqrt(player.r*player.r + circle.r * circle.r);
+                        }
+                        
+                    } else {
+                    temp.push(circle);
                     }
                 }
+                circles = temp;
                 return false;
             }
 
@@ -133,9 +142,10 @@
                 circles = [];
                 player.x = window.innerWidth / 2;
                 player.y = window.innerHeight / 2;
+                player.r = 5;
                 //add circles
                 for(let i = 0; i< totalCircles; i++){
-                    circles.push({x:Math.random() * context.canvas.width * 2/3 - context.canvas.width / 3, y:Math.random() * context.canvas.height, r:10+Math.random() * 20, c:generateRandomColor(),vx:(Math.random() - 0.5)*5, vy:(Math.random() - 0.5)*5});
+                    circles.push({x:Math.random() * context.canvas.width * 2/3 - context.canvas.width / 3, y:Math.random() * context.canvas.height, r:2+Math.random() * 35, c:generateRandomColor(),vx:(Math.random() - 0.5)*5, vy:(Math.random() - 0.5)*5});
                 }
                 
             }
